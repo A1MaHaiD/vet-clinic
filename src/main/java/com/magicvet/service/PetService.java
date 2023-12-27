@@ -1,6 +1,5 @@
 package main.java.com.magicvet.service;
 
-import com.sun.tools.javac.Main;
 import main.java.com.magicvet.VetApp;
 import main.java.com.magicvet.model.Cat;
 import main.java.com.magicvet.model.Dog;
