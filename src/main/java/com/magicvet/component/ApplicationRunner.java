@@ -17,11 +17,12 @@ public class ApplicationRunner {
             if (client != null) {
                 System.out.println("Adding a new pet.");
                 Pet pet = petService.registetNewPet();
-                client.setPet(pet);
-                pet.setOwnerName(client.getFirsName() + " " + client.getLastName());
-                System.out.println("Pet has been added.");
-
-                System.out.println(client);
+                if(pet!=null){
+                    client.setPet(pet);
+                    pet.setOwnerName(client.getFirsName() + " " + client.getLastName());
+                    System.out.println("Pet has been added.");
+                }
+                    System.out.println(client);
             }
         }
     }
