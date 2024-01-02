@@ -15,6 +15,11 @@ public class Dog extends Pet {
 
     }
 
+    public Dog(String type, String sex, String age, String name, String ownerName, String size) {
+        super(type, sex, age, name, ownerName);
+        this.size = size;
+    }
+
     public Dog(String size) {
         this.size = size;
     }

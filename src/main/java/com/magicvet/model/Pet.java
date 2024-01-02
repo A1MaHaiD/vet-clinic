@@ -9,6 +9,17 @@ public abstract class Pet {
     private String name;
     private String ownerName;
 
+    public Pet() {
+    }
+
+    public Pet(String type, String sex, String age, String name, String ownerName) {
+        this.type = type;
+        this.sex = sex;
+        this.age = age;
+        this.name = name;
+        this.ownerName = ownerName;
+    }
+
     public String getType() {
         return type;
     }
