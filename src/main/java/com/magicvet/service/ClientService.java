@@ -8,8 +8,7 @@ import java.util.regex.Pattern;
 
 public class ClientService {
     private final static String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    private final static String FIRST_NAME_PATTERN = "^[a-zA-Z]{2,}$";
-    private final static String LAST_NAME_PATTERN = "^[a-zA-Z]{1,}\\-{0,}[a-zA-Z]{1,}$";
+    private final static String NAME_PATTERN = "^[a-zA-Z]{2,}+(-[a-zA-Z]{2,}+)?$";
 
     public Client registerNewClient() {
         Client client = null;
@@ -33,7 +32,7 @@ public class ClientService {
         while (client.getFirsName() == null) {
             System.out.print("First name: ");
             String firstName = VetApp.SCANNER.nextLine();
-            if (isNameValid(firstName, FIRST_NAME_PATTERN)) {
+            if (isNameValid(firstName)) {
                 client.setFirsName(firstName);
             } else {
                 System.out.println("First Name is incorrect");
@@ -42,7 +41,7 @@ public class ClientService {
         while (client.getLastName() == null) {
             System.out.print("Last name: ");
             String lastName = VetApp.SCANNER.nextLine();
-            if (isNameValid(lastName, LAST_NAME_PATTERN)) {
+            if (isNameValid(lastName)) {
                 client.setLastName(lastName);
             } else {
                 System.out.println("Last Name is incorrect");
@@ -51,8 +50,8 @@ public class ClientService {
         return client;
     }
 
-    private static boolean isNameValid(String lastName, String inputPattern) {
-        Pattern pattern = Pattern.compile(inputPattern);
+    private static boolean isNameValid(String lastName) {
+        Pattern pattern = Pattern.compile(NAME_PATTERN);
         Matcher matcher = pattern.matcher(lastName);
         return matcher.matches();
     }
