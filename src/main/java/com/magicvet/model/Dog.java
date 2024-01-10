@@ -4,31 +4,27 @@ import java.util.Objects;
 
 public class Dog extends Pet {
 
-    public static final String XS = "xS";
-    public static final String S = "S";
-    public static final String M = "M";
-    public static final String L = "L";
-    public static final String XL = "xL";
-    private String size;
+
+    private Size size;
 
     public Dog() {
 
     }
 
-    public Dog(String type, String sex, String age, String name, String ownerName, String size) {
+    public Dog(String type, String sex, String age, String name, String ownerName, Size size) {
         super(type, sex, age, name, ownerName);
         this.size = size;
     }
 
-    public Dog(String size) {
+    public Dog(Size size) {
         this.size = size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
 
@@ -52,5 +48,19 @@ public class Dog extends Pet {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), size);
+    }
+
+    public enum Size {
+        XS(1), S(2), M(3), L(4), XL(5), UNKNOWN(0);
+        private final int values;
+
+
+        Size(int values) {
+            this.values = values;
+        }
+
+        public int getValues() {
+            return values;
+        }
     }
 }
