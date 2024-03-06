@@ -1,12 +1,14 @@
 package main.java.com.magicvet.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Client {
     private String firsName;
     private String lastName;
     private String email;
-    private Pet pet;
+    private List<Pet> pets = new ArrayList<>();
 
     public String getFirsName() {
         return firsName;
@@ -32,12 +34,16 @@ public class Client {
         this.email = email;
     }
 
-    public Pet getPet() {
-        return pet;
+    public List<Pet> getPets() {
+        return pets;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
     }
 
     @Override
@@ -46,7 +52,7 @@ public class Client {
                 + "\n\tfirsName = " + firsName
                 + ", lastName = " + lastName
                 + ", email = " + email
-                + ",\n\tpet = " + pet
+                + ",\n\tpets = " + pets
                 + "\n}";
     }
 
@@ -58,11 +64,11 @@ public class Client {
         return Objects.equals(firsName, client.firsName)
                 && Objects.equals(lastName, client.lastName)
                 && Objects.equals(email, client.email)
-                && Objects.equals(pet, client.pet);
+                && Objects.equals(pets, client.pets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firsName, lastName, email, pet);
+        return Objects.hash(firsName, lastName, email, pets);
     }
 }
