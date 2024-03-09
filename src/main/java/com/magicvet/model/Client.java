@@ -9,6 +9,7 @@ public class Client {
     private String lastName;
     private String email;
     private List<Pet> pets = new ArrayList<>();
+    private Location location;
 
     public String getFirsName() {
         return firsName;
@@ -34,6 +35,14 @@ public class Client {
         this.email = email;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public List<Pet> getPets() {
         return pets;
     }
@@ -52,6 +61,7 @@ public class Client {
                 + "\n\tfirsName = " + firsName
                 + ", lastName = " + lastName
                 + ", email = " + email
+                + ", location = " + location
                 + ",\n\tpets = " + pets
                 + "\n}";
     }
@@ -70,5 +80,9 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hash(firsName, lastName, email, pets);
+    }
+
+    public enum Location {
+        KYIV, LVIV, ODESA
     }
 }
