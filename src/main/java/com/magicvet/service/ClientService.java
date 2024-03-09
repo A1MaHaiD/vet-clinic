@@ -47,6 +47,9 @@ public class ClientService {
                 System.out.println("Last Name is incorrect");
             }
         }
+        System.out.println("Location: ");
+        String location = VetApp.SCANNER.nextLine();
+        client.setLocation(Client.Location.valueOf(location));
         return client;
     }
 
