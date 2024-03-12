@@ -37,11 +37,10 @@ public class PetService {
         if (type.equals(DOG_TYPE)) {
             System.out.println("Size (XS / S / M / L / XL): ");
             ((Dog) pet).setSize(
-                    Dog.Size.valueOf(
+                    Dog.Size.fromString(
                             VetApp.SCANNER.nextLine()
                     ));
         }
-
         return pet;
     }
 }
