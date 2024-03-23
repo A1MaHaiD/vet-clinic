@@ -71,6 +71,7 @@ public class Client {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Client client = (Client) object;
+
         return Objects.equals(firsName, client.firsName)
                 && Objects.equals(lastName, client.lastName)
                 && Objects.equals(email, client.email)

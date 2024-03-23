@@ -16,6 +16,7 @@ public class ClientService {
         System.out.println("Please provide client details.");
         System.out.print("Email: ");
         String email = VetApp.SCANNER.nextLine();
+
         if (isEmailValid(email)) {
             client = buildClient(email);
             System.out.println("New client: " + client.getFirsName()
@@ -24,15 +25,18 @@ public class ClientService {
         } else {
             System.out.println("Provided email is invalid.");
         }
+
         return Optional.ofNullable(client);
     }
 
     static Client buildClient(String email) {
         Client client = new Client();
         client.setEmail(email);
+
         while (client.getFirsName() == null) {
             System.out.print("First name: ");
             String firstName = VetApp.SCANNER.nextLine();
+
             if (isNameValid(firstName)) {
                 client.setFirsName(firstName);
             } else {
@@ -42,6 +46,7 @@ public class ClientService {
         while (client.getLastName() == null) {
             System.out.print("Last name: ");
             String lastName = VetApp.SCANNER.nextLine();
+
             if (isNameValid(lastName)) {
                 client.setLastName(lastName);
             } else {
@@ -51,6 +56,7 @@ public class ClientService {
         System.out.println("Location: ");
         Client.Location location;
         String locationInput = VetApp.SCANNER.nextLine();
+
         try {
             location = Client.Location.valueOf(locationInput);
         } catch (IllegalArgumentException e) {
@@ -61,18 +67,21 @@ public class ClientService {
                     + Client.Location.UNKNOWN);
         }
         client.setLocation(location);
+
         return client;
     }
 
     private static boolean isNameValid(String lastName) {
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         Matcher matcher = pattern.matcher(lastName);
+
         return matcher.matches();
     }
 
     static boolean isEmailValid(String email) {
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
+
         return matcher.matches();
     }
 }

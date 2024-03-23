@@ -36,10 +36,20 @@ public class PetService {
 
         if (type.equals(DOG_TYPE)) {
             System.out.println("Size (XS / S / M / L / XL): ");
-            ((Dog) pet).setSize(
-                    Dog.Size.fromString(
-                            VetApp.SCANNER.nextLine()
-                    ));
+            Dog.Size size;
+            String sizeInput = VetApp.SCANNER.nextLine();
+            try {
+                size = Dog.Size.valueOf(sizeInput);
+                ((Dog) pet).setSize(size);
+            } catch (IllegalArgumentException e) {
+                size = Dog.Size.UNKNOWN;
+                System.out.println("Unable to parse value '"
+                        + sizeInput
+                        + "'. Using default value: "
+                        + Dog.Size.UNKNOWN
+                );
+                ((Dog) pet).setSize(size);
+            }
         }
         return pet;
     }
