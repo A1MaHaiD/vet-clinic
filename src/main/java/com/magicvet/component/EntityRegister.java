@@ -23,7 +23,7 @@ public class EntityRegister {
         do {
             Optional<Client> client = addClient();
             client.ifPresent(clients::add);
-        } while (verifyRepeating(message));
+        } while (hasNextClient(message));
 
         Map<Client.Location, List<Client>> clientsByLocation = clients.stream()
                 .collect(Collectors.groupingBy(Client::getLocation));
@@ -53,7 +53,7 @@ public class EntityRegister {
         do {
             addPet(client);
             System.out.println(client);
-        } while (verifyRepeating(message));
+        } while (hasNextClient(message));
     }
 
     private void addPet(Client client) {
@@ -66,7 +66,7 @@ public class EntityRegister {
         }
     }
 
-    private static boolean verifyRepeating(String message) {
+    private static boolean hasNextClient(String message) {
         System.out.println(message);
         String answer = VetApp.SCANNER.nextLine();
         if ("y".equals(answer)) {
@@ -75,7 +75,7 @@ public class EntityRegister {
             return false;
         } else {
             System.out.println("Incorrect answer. Please try again.");
-            return verifyRepeating(message);
+            return hasNextClient(message);
         }
     }
 }
