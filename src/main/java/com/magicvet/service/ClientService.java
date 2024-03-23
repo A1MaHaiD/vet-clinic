@@ -8,8 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ClientService {
-    private final static String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    private final static String NAME_PATTERN = "^[a-zA-Z]{2,}+(-[a-zA-Z]{2,}+)?$";
+    private final static Pattern EMAIL_PATTERN = Pattern
+            .compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    private final static Pattern NAME_PATTERN = Pattern
+            .compile("^[a-zA-Z]{2,}+(-[a-zA-Z]{2,}+)?$");
 
     public Optional<Client> registerNewClient() {
         Client client = null;
@@ -72,15 +74,13 @@ public class ClientService {
     }
 
     private static boolean isNameValid(String lastName) {
-        Pattern pattern = Pattern.compile(NAME_PATTERN);
-        Matcher matcher = pattern.matcher(lastName);
+        Matcher matcher = NAME_PATTERN.matcher(lastName);
 
         return matcher.matches();
     }
 
     static boolean isEmailValid(String email) {
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
 
         return matcher.matches();
     }
