@@ -58,10 +58,10 @@ public class EntityRegister {
 
     private void addPet(Client client) {
         System.out.println("Adding a new pet.");
-        Pet pet = petService.registetNewPet();
-        if (pet != null) {
-            client.addPet(pet);
-            pet.setOwnerName(client.getFirsName() + " " + client.getLastName());
+        Optional <Pet> pet = Optional.ofNullable(petService.registetNewPet());
+        if (pet.isPresent()) {
+            client.addPet(pet.get());
+            pet.get().setOwnerName(client.getFirsName() + " " + client.getLastName());
             System.out.println("Pet has been added.");
         }
     }
