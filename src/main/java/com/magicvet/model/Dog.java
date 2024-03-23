@@ -3,12 +3,9 @@ package main.java.com.magicvet.model;
 import java.util.Objects;
 
 public class Dog extends Pet {
-
-
     private Size size;
 
     public Dog() {
-
     }
 
     @Override
@@ -47,6 +44,7 @@ public class Dog extends Pet {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Dog dog = (Dog) object;
+
         return Objects.equals(size, dog.size);
     }
 
@@ -59,22 +57,8 @@ public class Dog extends Pet {
         XS(1), S(2), M(3), L(4), XL(5), UNKNOWN(0);
         private final int values;
 
-
         Size(int values) {
             this.values = values;
-        }
-
-        public static Size fromString(String value) {
-            for (Size size : values()) {
-                if (size.toString().equals(value)) {
-                    return size;
-                }
-            }
-            System.out.println("Unable to parse value '"
-                    + value
-                    + "'. Using default value: "
-                    + UNKNOWN);
-            return UNKNOWN;
         }
 
         public int getValues() {

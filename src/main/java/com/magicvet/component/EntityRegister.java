@@ -44,6 +44,7 @@ public class EntityRegister {
         Optional<Client> client = clientService.registerNewClient();
         client.ifPresent(this::registerPets);
         System.out.println(client);
+
         return client;
     }
 

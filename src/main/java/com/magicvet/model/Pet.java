@@ -87,6 +87,7 @@ public abstract class Pet {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Pet pet = (Pet) object;
+
         return Objects.equals(type, pet.type)
                 && Objects.equals(sex, pet.sex)
                 && Objects.equals(age, pet.age)

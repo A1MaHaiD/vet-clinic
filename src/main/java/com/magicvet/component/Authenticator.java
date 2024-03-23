@@ -7,6 +7,7 @@ public class Authenticator {
 
     public static boolean auth() {
         boolean accepted = false;
+
         for (int i = 0; i < 3; i++) {
             System.out.print("Password: ");
             String input = VetApp.SCANNER.nextLine();
@@ -18,6 +19,7 @@ public class Authenticator {
             }
         }
         System.out.println(accepted ? "Welcome to the Magic Vet!" : "Application has been blocked.");
+
         return accepted;
     }
 }
