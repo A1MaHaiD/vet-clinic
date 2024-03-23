@@ -8,7 +8,7 @@ public abstract class Pet {
 
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
     private String type;
-    private String sex;
+    private Sex sex;
     private String age;
     private String name;
     private String ownerName;
@@ -18,7 +18,7 @@ public abstract class Pet {
     public Pet() {
     }
 
-    public Pet(String type, String sex, String age, String name, String ownerName) {
+    public Pet(String type, Sex sex, String age, String name, String ownerName) {
         this.type = type;
         this.sex = sex;
         this.age = age;
@@ -34,11 +34,11 @@ public abstract class Pet {
         this.type = type;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -74,7 +74,7 @@ public abstract class Pet {
     public String toString() {
         return "\nPet {" +
                 "type = " + type
-                + ", sex = " + sex
+                + ", sex = " + sex.getValues()
                 + ", age = " + age
                 + ", name = " + name
                 + ", ownerName = " + ownerName
@@ -98,5 +98,33 @@ public abstract class Pet {
     @Override
     public int hashCode() {
         return Objects.hash(type, sex, age, name, ownerName);
+    }
+
+    public enum Sex {
+        MALE("male"), FEMALE("female");
+
+        private final String values;
+
+        Sex(String values) {
+            this.values = values;
+        }
+
+        public String getValues() {
+            return values;
+        }
+    }
+
+    public enum HealthState{
+        EMERGENCY(1),BAD(2),NORMAL(3),
+        GOOD(4),WELL(5),VERY_WELL(6);
+        private final int value;
+
+        HealthState(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

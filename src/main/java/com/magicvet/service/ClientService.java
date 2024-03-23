@@ -2,24 +2,19 @@ package main.java.com.magicvet.service;
 
 import main.java.com.magicvet.VetApp;
 import main.java.com.magicvet.model.Client;
+import main.java.com.magicvet.service.validation.EnglishValidationService;
 
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ClientService {
-    private final static Pattern EMAIL_PATTERN = Pattern
-            .compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-    private final static Pattern NAME_PATTERN = Pattern
-            .compile("^[a-zA-Z]{2,}+(-[a-zA-Z]{2,}+)?$");
-
+    private final EnglishValidationService validation = new EnglishValidationService();
     public Optional<Client> registerNewClient() {
         Client client = null;
         System.out.println("Please provide client details.");
         System.out.print("Email: ");
         String email = VetApp.SCANNER.nextLine();
 
-        if (isEmailValid(email)) {
+        if (validation.isEmailValid(email)) {
             client = buildClient(email);
             System.out.println("New client: " + client.getFirsName()
                     + " " + client.getLastName()
@@ -31,7 +26,8 @@ public class ClientService {
         return Optional.ofNullable(client);
     }
 
-    static Client buildClient(String email) {
+    Client buildClient(String email) {
+
         Client client = new Client();
         client.setEmail(email);
 
@@ -39,7 +35,7 @@ public class ClientService {
             System.out.print("First name: ");
             String firstName = VetApp.SCANNER.nextLine();
 
-            if (isNameValid(firstName)) {
+            if (validation.isNameValid(firstName)) {
                 client.setFirsName(firstName);
             } else {
                 System.out.println("First Name is incorrect");
@@ -49,7 +45,7 @@ public class ClientService {
             System.out.print("Last name: ");
             String lastName = VetApp.SCANNER.nextLine();
 
-            if (isNameValid(lastName)) {
+            if (validation.isNameValid(lastName)) {
                 client.setLastName(lastName);
             } else {
                 System.out.println("Last Name is incorrect");
@@ -71,17 +67,5 @@ public class ClientService {
         client.setLocation(location);
 
         return client;
-    }
-
-    private static boolean isNameValid(String lastName) {
-        Matcher matcher = NAME_PATTERN.matcher(lastName);
-
-        return matcher.matches();
-    }
-
-    static boolean isEmailValid(String email) {
-        Matcher matcher = EMAIL_PATTERN.matcher(email);
-
-        return matcher.matches();
     }
 }

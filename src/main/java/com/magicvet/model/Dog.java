@@ -12,7 +12,7 @@ public class Dog extends Pet {
     public String toString() {
         return "\nPet {" +
                 "type = " + getType()
-                + ", sex = " + getSex()
+                + ", sex = " + getSex().getValues()
                 + ", age = " + getAge()
                 + ", name = " + getName()
                 + ", size = " + getSize()
@@ -21,7 +21,7 @@ public class Dog extends Pet {
                 + "}";
     }
 
-    public Dog(String type, String sex, String age, String name, String ownerName, Size size) {
+    public Dog(String type, Sex sex, String age, String name, String ownerName, Size size) {
         super(type, sex, age, name, ownerName);
         this.size = size;
     }
