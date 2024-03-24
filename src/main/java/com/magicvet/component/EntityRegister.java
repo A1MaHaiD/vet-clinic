@@ -16,6 +16,7 @@ public class EntityRegister {
 
     private final ClientService clientService = new ClientService();
     private final PetService petService = new PetService();
+    private final Sandbox sandbox = new Sandbox();
 
     public void registerClient() {
         List<Client> clients = new ArrayList<>();
@@ -28,6 +29,15 @@ public class EntityRegister {
         Map<Client.Location, List<Client>> clientsByLocation = clients.stream()
                 .collect(Collectors.groupingBy(Client::getLocation));
         printClients(clientsByLocation);
+        sandbox.writeSandbox(clients.toString());
+    }
+
+    public void printSandbox() {
+        sandbox.writeSandbox("");
+        List<String> sandboxList = sandbox.readSandbox();
+        for (String line : sandboxList) {
+            System.out.println(line);
+        }
     }
 
     private void printClients(Map<Client.Location, List<Client>> clientsByLocation) {
@@ -37,6 +47,7 @@ public class EntityRegister {
                     + "):"
                     + "\n\t" + clients.getValue();
             System.out.println(content);
+            printSandbox();
         }
     }
 
@@ -53,12 +64,13 @@ public class EntityRegister {
         do {
             addPet(client);
             System.out.println(client);
+            sandbox.readSandbox();
         } while (hasNextClient(message));
     }
 
     private void addPet(Client client) {
         System.out.println("Adding a new pet.");
-        Optional <Pet> pet = Optional.ofNullable(petService.registetNewPet());
+        Optional<Pet> pet = Optional.ofNullable(petService.registetNewPet());
         if (pet.isPresent()) {
             client.addPet(pet.get());
             pet.get().setOwnerName(client.getFirsName() + " " + client.getLastName());
