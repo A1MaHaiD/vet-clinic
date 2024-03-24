@@ -11,6 +11,7 @@ public abstract class Pet {
     private Sex sex;
     private String age;
     private String name;
+    private HealthState healthState;
     private String ownerName;
 
     private final LocalDateTime registrationDate = LocalDateTime.now();
@@ -18,11 +19,12 @@ public abstract class Pet {
     public Pet() {
     }
 
-    public Pet(String type, Sex sex, String age, String name, String ownerName) {
+    public Pet(String type, Sex sex, String age, String name, HealthState healthState, String ownerName) {
         this.type = type;
         this.sex = sex;
         this.age = age;
         this.name = name;
+        this.healthState = healthState;
         this.ownerName = ownerName;
     }
 
@@ -58,6 +60,14 @@ public abstract class Pet {
         this.name = name;
     }
 
+    public HealthState getHealthState() {
+        return healthState;
+    }
+
+    public void setHealthState(HealthState healthState) {
+        this.healthState = healthState;
+    }
+
     public String getOwnerName() {
         return ownerName;
     }
@@ -77,6 +87,7 @@ public abstract class Pet {
                 + ", sex = " + sex.getValues()
                 + ", age = " + age
                 + ", name = " + name
+                + ", healthState = " + healthState
                 + ", ownerName = " + ownerName
                 + ", registrationDate = " + registrationDate.format(FORMATTER)
                 + "}";
@@ -92,12 +103,13 @@ public abstract class Pet {
                 && Objects.equals(sex, pet.sex)
                 && Objects.equals(age, pet.age)
                 && Objects.equals(name, pet.name)
+                && Objects.equals(healthState, pet.healthState)
                 && Objects.equals(ownerName, pet.ownerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, sex, age, name, ownerName);
+        return Objects.hash(type, sex, age, name, healthState, ownerName);
     }
 
     public enum Sex {
@@ -114,9 +126,9 @@ public abstract class Pet {
         }
     }
 
-    public enum HealthState{
-        EMERGENCY(1),BAD(2),NORMAL(3),
-        GOOD(4),WELL(5),VERY_WELL(6);
+    public enum HealthState {
+        UNKNOWN(0), EMERGENCY(1), BAD(2), NORMAL(3),
+        GOOD(4), WELL(5), VERY_WELL(6);
         private final int value;
 
         HealthState(int value) {

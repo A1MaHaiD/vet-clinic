@@ -2,12 +2,12 @@ package main.java.com.magicvet.service;
 
 import main.java.com.magicvet.VetApp;
 import main.java.com.magicvet.model.Client;
-import main.java.com.magicvet.service.validation.EnglishValidationService;
+import main.java.com.magicvet.service.validation.ValidationImpl;
 
 import java.util.Optional;
 
 public class ClientService {
-    private final EnglishValidationService validation = new EnglishValidationService();
+    private final ValidationImpl validation = new ValidationImpl();
     public Optional<Client> registerNewClient() {
         Client client = null;
         System.out.println("Please provide client details.");
@@ -51,7 +51,7 @@ public class ClientService {
                 System.out.println("Last Name is incorrect");
             }
         }
-        System.out.println("Location: ");
+        System.out.print("Location: ");
         Client.Location location;
         String locationInput = VetApp.SCANNER.nextLine();
 

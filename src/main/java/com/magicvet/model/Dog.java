@@ -15,14 +15,15 @@ public class Dog extends Pet {
                 + ", sex = " + getSex().getValues()
                 + ", age = " + getAge()
                 + ", name = " + getName()
+                + ", healthState = " + getHealthState()
                 + ", size = " + getSize()
                 + ", ownerName = " + getOwnerName()
                 + ", registrationDate = " + getRegistrationDate().format(FORMATTER)
                 + "}";
     }
 
-    public Dog(String type, Sex sex, String age, String name, String ownerName, Size size) {
-        super(type, sex, age, name, ownerName);
+    public Dog(String type, Sex sex, String age, String name, HealthState healthState, String ownerName, Size size) {
+        super(type, sex, age, name, healthState, ownerName);
         this.size = size;
     }
 
