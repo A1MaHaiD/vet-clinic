@@ -3,7 +3,7 @@ package main.java.com.magicvet.service.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EnglishValidationService implements ValidationService {
+public class ValidationImpl implements ValidationService {
     private final static Pattern EMAIL_PATTERN = Pattern
             .compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     private final static Pattern NAME_PATTERN = Pattern

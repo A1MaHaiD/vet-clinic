@@ -4,13 +4,15 @@ import main.java.com.magicvet.VetApp;
 import main.java.com.magicvet.model.Cat;
 import main.java.com.magicvet.model.Dog;
 import main.java.com.magicvet.model.Pet;
-import main.java.com.magicvet.service.validation.EnglishValidationService;
+import main.java.com.magicvet.service.validation.ValidationImpl;
+
+import java.util.InputMismatchException;
 
 public class PetService {
 
     private static final String DOG_TYPE = "dog";
     private static final String CAT_TYPE = "cat";
-    private final EnglishValidationService validation = new EnglishValidationService();
+    private final ValidationImpl validation = new ValidationImpl();
 
     public Pet registetNewPet() {
         Pet pet = null;
@@ -35,7 +37,7 @@ public class PetService {
             if (validation.isAgeValid(ageInput)) {
                 pet.setAge(ageInput);
             } else {
-                System.out.println("Age is incorrect");
+                System.out.print("Age is incorrect: " + ageInput + "\n");
             }
         }
 
@@ -59,17 +61,16 @@ public class PetService {
             if (validation.isNameValid(petNameInput)) {
                 pet.setName(petNameInput);
             } else {
-                System.out.println("First Name is incorrect");
+                System.out.println("Name is incorrect");
             }
         }
 
         if (type.equals(DOG_TYPE)) {
-            System.out.println("Size (XS / S / M / L / XL): ");
             Dog.Size size;
+            System.out.print("Size (XS / S / M / L / XL): ");
             String sizeInput = VetApp.SCANNER.nextLine();
             try {
                 size = Dog.Size.valueOf(sizeInput);
-                ((Dog) pet).setSize(size);
             } catch (IllegalArgumentException e) {
                 size = Dog.Size.UNKNOWN;
                 System.out.println("Unable to parse value '"
@@ -77,8 +78,24 @@ public class PetService {
                         + "'. Using default value: "
                         + Dog.Size.UNKNOWN
                 );
-                ((Dog) pet).setSize(size);
             }
+            ((Dog) pet).setSize(size);
+        }
+
+        System.out.print("Heath State (EMERGENCY(1) / BAD(2) / NORMAL(3) / GOOD(4) / WELL(5) / VERY_WELL(6)): ");
+        Pet.HealthState healthState;
+        try {
+            int stateInput = Integer.parseInt(VetApp.SCANNER.nextLine());
+            healthState = Pet.HealthState.values()[stateInput];
+            pet.setHealthState(healthState);
+        } catch (InputMismatchException | IllegalArgumentException e) {
+            healthState = Pet.HealthState.UNKNOWN;
+            System.out.println("Unable to parse value '"
+                    + healthState
+                    + "'. Using default value: "
+                    + Pet.HealthState.UNKNOWN
+            );
+            pet.setHealthState(healthState);
         }
         return pet;
     }
